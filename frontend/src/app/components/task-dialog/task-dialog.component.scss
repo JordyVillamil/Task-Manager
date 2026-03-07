@@ -1,0 +1,12 @@
+/* Los campos del formulario ocupan todo el ancho */
+.full-width {
+  width: 100%;
+}
+
+/* Espacio entre los campos */
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 400px;
+}

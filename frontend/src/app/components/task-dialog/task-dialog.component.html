@@ -1,0 +1,37 @@
+<!-- Título del diálogo: cambia según si es crear o editar -->
+<h2 mat-dialog-title>{{ isEdit ? 'Editar Tarea' : 'Nueva Tarea' }}</h2>
+
+<!-- Contenido del formulario -->
+<mat-dialog-content>
+
+  <!-- Campo: Título (obligatorio) -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Título</mat-label>
+    <input matInput [(ngModel)]="task.titulo" placeholder="Ej: Revisar documentación" required>
+  </mat-form-field>
+
+  <!-- Campo: Descripción (opcional) -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="task.descripcion" placeholder="Describe la tarea..." rows="3"></textarea>
+  </mat-form-field>
+
+  <!-- Campo: Estado (selector desplegable) -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Estado</mat-label>
+    <mat-select [(ngModel)]="task.estado">
+      @for (estado of estados; track estado) {
+        <mat-option [value]="estado">{{ estado }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<!-- Botones de acción -->
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!task.titulo">
+    {{ isEdit ? 'Actualizar' : 'Crear' }}
+  </button>
+</mat-dialog-actions>

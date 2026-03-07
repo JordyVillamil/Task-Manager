@@ -1,0 +1,38 @@
+/* Spacer para empujar el botón a la derecha en el toolbar */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Contenedor principal con margen */
+.container {
+  padding: 24px;
+}
+
+/* La tabla ocupa todo el ancho */
+table {
+  width: 100%;
+}
+
+/* Chips de colores según el estado */
+.chip-pendiente {
+  background-color: #ff9800 !important;
+  color: white !important;
+}
+
+.chip-en-progreso {
+  background-color: #2196f3 !important;
+  color: white !important;
+}
+
+.chip-completada {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+/* Mensaje cuando no hay tareas */
+.no-tasks {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 16px;
+  color: #888;
+}
