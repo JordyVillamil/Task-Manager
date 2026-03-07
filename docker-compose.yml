@@ -1,0 +1,44 @@
+services:
+  # Base de datos MySQL
+  db:
+    image: mysql:8.4
+    container_name: task-manager-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: task_manager
+    ports:
+      - "3307:3306"               # Puerto 3307 para no chocar con MySQL local
+    volumes:
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql  # Ejecuta el script al iniciar
+      - db_data:/var/lib/mysql    # Persistir datos
+
+  # Backend (Node.js + Express)
+  backend:
+    container_name: task-manager-backend
+    build: ./backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db                 # Se conecta al servicio "db" (MySQL)
+      DB_USER: root
+      DB_PASSWORD: root123
+      DB_NAME: task_manager
+      DB_PORT: 3306
+      PORT: 3000
+    depends_on:
+      - db                        # Espera a que MySQL arranque primero
+
+  # Frontend (Angular + Nginx)
+  frontend:
+    container_name: task-manager-frontend
+    build: ./frontend
+    restart: always
+    ports:
+      - "4200:80"                 # Puerto 4200 → Nginx en puerto 80
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
