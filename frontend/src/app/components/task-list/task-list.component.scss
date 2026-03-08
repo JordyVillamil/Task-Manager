@@ -1,3 +1,20 @@
+/* Toolbar personalizado */
+.toolbar {
+  background-color: #1565c0;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar-icon {
+  margin-right: 8px;
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}
+
 /* Spacer para empujar el botón a la derecha en el toolbar */
 .spacer {
   flex: 1 1 auto;
@@ -6,11 +23,30 @@
 /* Contenedor principal con margen */
 .container {
   padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* La tabla ocupa todo el ancho */
 table {
   width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Hover en filas */
+tr.mat-mdc-row:hover {
+  background-color: rgba(21, 101, 192, 0.04);
+  cursor: pointer;
+}
+
+/* Encabezados de tabla */
+th.mat-mdc-header-cell {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Chips de colores según el estado */
@@ -32,7 +68,18 @@ table {
 /* Mensaje cuando no hay tareas */
 .no-tasks {
   text-align: center;
-  margin-top: 32px;
+  margin-top: 48px;
   font-size: 16px;
   color: #888;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .toolbar {
+    font-size: 16px;
+  }
 }
