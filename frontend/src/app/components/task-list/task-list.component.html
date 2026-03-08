@@ -15,7 +15,7 @@
 <div class="container">
 
   <!-- TABLA de Angular Material -->
-  <table mat-table [dataSource]="tasks" class="mat-elevation-z4">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z4">
 
     <!-- Columna: ID -->
     <ng-container matColumnDef="id">
@@ -74,7 +74,7 @@
   </table>
 
   <!-- Mensaje cuando no hay tareas -->
-  @if (tasks.length === 0) {
+  @if (dataSource.data.length === 0) {
     <p class="no-tasks">No hay tareas registradas. ¡Crea una nueva!</p>
   }
 

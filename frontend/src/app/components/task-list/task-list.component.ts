@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Módulos de Angular Material que usaremos
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -28,9 +28,9 @@ import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
-export class TaskListComponent implements OnInit {
-  // Array donde guardaremos las tareas que vienen del backend
-  tasks: Task[] = [];
+export class TaskListComponent implements AfterViewInit {
+  // DataSource para la tabla de Angular Material
+  dataSource = new MatTableDataSource<Task>([]);
 
   // Las columnas que mostrará la tabla
   displayedColumns: string[] = ['id', 'titulo', 'descripcion', 'estado', 'fecha_creacion', 'acciones'];
@@ -41,15 +41,15 @@ export class TaskListComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  // ngOnInit se ejecuta cuando el componente se carga — aquí pedimos las tareas
-  ngOnInit(): void {
+  // ngAfterViewInit se ejecuta después del primer render
+  ngAfterViewInit(): void {
     this.loadTasks();
   }
 
   // Pedir las tareas al backend
   loadTasks(): void {
     this.taskService.getTasks().subscribe({
-      next: (data) => this.tasks = data,
+      next: (data) => this.dataSource.data = data,
       error: (err) => console.error('Error al cargar tareas', err)
     });
   }
